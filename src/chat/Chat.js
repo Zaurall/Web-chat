@@ -3,8 +3,6 @@ import Input from '../input/Input';
 import Message from '../message/Message';
 
 function Chat({ currentUser }) {
-  const [message, setMessage] = useState('');
-
   const [messages, setMessages] = useState([]);
 
   function onSend(message) {
