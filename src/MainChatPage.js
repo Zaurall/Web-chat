@@ -18,7 +18,7 @@ function MainChatPage() {
     return (
     <main>
         <Login onLogin={handleLogin} users={users} />
-        <Chat currentUser={currentUser} users={users} />
+        {/* <Chat currentUser={currentUser} users={users} /> */}
     </main>
     );
 }
