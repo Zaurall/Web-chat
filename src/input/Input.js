@@ -2,19 +2,20 @@ import { useState } from 'react';
 import classes from './Input.module.css';
 
 const Input = ({ onSend, users, currentUser }) => {
-  const [senderUsername, setUsername] = useState('');
-  const [message, setMessage] = useState('');
+  const [receiverUsername, setUsername] = useState('');
+  let [message, setMessage] = useState('');
 
   function send(e) {
     e.preventDefault();
-    if (!senderUsername || !message) {
+    if (!receiverUsername || !message) {
         alert('Please enter a username and a message');
         return;
     }
-    console.log(currentUser.name, 123);
+    let senderUsername = currentUser.name;
     onSend({
         message,
-        currentUser
+        receiverUsername,
+        senderUsername
     });
     setMessage('');
   }
