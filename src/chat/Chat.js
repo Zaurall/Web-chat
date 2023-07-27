@@ -4,9 +4,12 @@ import Message from '../message/Message';
 
 function Chat({ currentUser, users }) {
     const [messages, setMessages] = useState([]);
+    const [receivers, setReceivers] = useState([]);
 
-    function onSend(message) {
+    function onSend({message, username}) {
+        console.log({message, username});
         setMessages((prevMessages) => [...prevMessages, message]);
+        setReceivers((prevReceivers) => [...prevReceivers, receivers]);
     }
 
     return (
@@ -14,12 +17,15 @@ function Chat({ currentUser, users }) {
         <h2>Добро пожаловать, {currentUser.name}!</h2>
         <div>
             <ul>
-                {messages.map((message) => (
-                    <Message {...message} key={message.username + message.message} />
-                ))}
+                {messages.map((message) => {
+                    console.log(message, currentUser);
+                    if (currentUser.name === receivers) {
+                        (<Message {...message} key={message.receiver + message.message} />)
+                    }
+                })}
             </ul>
         </div>
-        <Input onSend={onSend} users={users} />
+            <Input onSend={onSend} users={users} currentUser={currentUser} />
         </div>
     );
 }

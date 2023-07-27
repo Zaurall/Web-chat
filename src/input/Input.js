@@ -1,46 +1,46 @@
 import { useState } from 'react';
 import classes from './Input.module.css';
 
-const Input = ({ onSend, users }) => {
-  const [username, setUsername] = useState('');
+const Input = ({ onSend, users, currentUser }) => {
+  const [senderUsername, setUsername] = useState('');
   const [message, setMessage] = useState('');
 
   function send(e) {
     e.preventDefault();
-    if (!username || !message) {
+    if (!senderUsername || !message) {
         alert('Please enter a username and a message');
         return;
     }
-
+    console.log(currentUser.name, 123);
     onSend({
         message,
-        username,
+        currentUser
     });
     setMessage('');
   }
 
   return (
     <form onSubmit={send} action="" className={classes.form}>
-        <input type="text" name="product" list="productName" />
-        <datalist id="productName">
+        <input 
+            className={classes.input}
+            type="text"
+            name="receiver" 
+            list="receiverName" 
+            onChange={(e) => setUsername(e.currentTarget.value)}
+            placeholder="Имя получателя"
+            style={{ flexGrow: 0 }}
+        />
+        <datalist id="receiverName">
             {users.map((user) => (
-                <option value={user.id}>{user.name}</option>
+                <option value={user.name}></option>
             ))}
         </datalist>
         <input
             className={classes.input}
             autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.currentTarget.value)}
-            placeholder="Name"
-            style={{ flexGrow: 0 }}
-        />
-        <input
-            className={classes.input}
-            autoComplete="off"
             value={message}
             onChange={(e) => setMessage(e.currentTarget.value)}
-            placeholder="Type your message..."
+            placeholder="Напишите сообщение..."
         />
         <button>Send</button>
     </form>
