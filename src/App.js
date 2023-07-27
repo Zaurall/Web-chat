@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Message from './message/Message';
+import Input from './input/Input';
+import Login from './login/Login';
+import Chat from './chat/Chat';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [messages, setMessages] = useState([]);
+
+    function onSend(message) {
+        setMessages((prevMessages) => [...prevMessages, message]);
+    }
+
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const handleLogin = (user) => {
+        setCurrentUser(user);
+    };
+
+    return (
+    <main>
+        <Login onLogin={handleLogin} />
+        <ul>
+            {messages.map((message) => (
+                <Message {...message} key={message.username + message.message} />
+            ))}
+        </ul>
+        <Input onSend={onSend} />
+        <Chat currentUser={currentUser} />
+    </main>
+    );
 }
 
 export default App;

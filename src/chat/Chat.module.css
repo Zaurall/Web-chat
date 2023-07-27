@@ -1,0 +1,15 @@
+form {
+    background-color: aliceblue;
+}
+.value {
+    color: violet;
+}
+input {
+    background-color: aqua;
+}
+.li {
+    padding: 0.5rem 1rem;
+}
+.li:nth-child(odd) {
+    background-color: #f8f8f8;
+}
